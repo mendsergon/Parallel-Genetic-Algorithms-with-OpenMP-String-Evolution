@@ -1,0 +1,21 @@
+CC = gcc
+CFLAGS = -fopenmp -O3 -Wall -Wextra
+TARGET = ga_parallel
+SOURCES = main_ga.c ga_parallel.c
+HEADERS = ga_parallel.h
+
+all: $(TARGET)
+
+$(TARGET): $(SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) $(SOURCES) -o $(TARGET) -lm
+
+debug: $(SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) -g $(SOURCES) -o $(TARGET)_debug -lm
+
+clean:
+	rm -f $(TARGET) $(TARGET)_debug
+
+run: $(TARGET)
+	./$(TARGET)
+
+.PHONY: all clean run debug
